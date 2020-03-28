@@ -59,3 +59,6 @@ gem 'serviceworker-rails', '~> 0.6.0'
 
 # Encryption Utilities for Web Push protocol
 gem 'webpush', '~> 1.0.0'
+
+gem 'omniauth-google-oauth2', '~>0.8.0'
+gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'

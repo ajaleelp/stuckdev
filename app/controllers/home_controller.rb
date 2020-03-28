@@ -1,9 +1,9 @@
 class HomeController < ApplicationController
   def index
+    redirect_to dashboard_path if current_user
   end
 
   def subscribe
-    binding.pry
     head :ok
   end
 end

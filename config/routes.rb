@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  get '/dashboard', to: 'dashboard#show'
+  get 'sessions/create'
+  get 'sessions/destroy'
   root 'home#index'
-  post "/subscribe" => "home#subscribe"
+  post "/subscribe", to: "home#subscribe"
+
+  get 'google_login', to: redirect('/auth/google_oauth2'), as: 'google_login'
+  get 'github_login', to: redirect('/auth/github'), as: 'github_login'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
 end
