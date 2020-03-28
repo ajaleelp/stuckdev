@@ -1,0 +1,64 @@
+if ('serviceWorker' in navigator) {
+  // Use the window load event to keep the page load performant
+  window.addEventListener('load', () => {
+    console.log('Registering service worker...');
+    navigator.serviceWorker.register('/serviceworker.js')
+      .then(function(reg) {
+        var serviceWorker;
+        if (reg.installing) {
+          serviceWorker = reg.installing;
+           console.log('Service worker installing');
+        } else if (reg.waiting) {
+          serviceWorker = reg.waiting;
+           console.log('Service worker installed & waiting');
+        } else if (reg.active) {
+          serviceWorker = reg.active;
+           console.log('Service worker active');
+        }
+
+        if (serviceWorker) {
+          console.log("sw current state", serviceWorker.state);
+          if (serviceWorker.state == "activated") {
+            //If push subscription wasnt done yet have to do here
+            console.log("sw already activated - Do watever needed here");
+          }
+          serviceWorker.addEventListener("statechange", function(e) {
+            console.log("sw statechange : ", e.target.state);
+            if (e.target.state == "activated") {
+              // use pushManger for subscribing here.
+              console.log("Just now activated. now we can subscribe for push notification")
+              console.log('Successfully registered!', ':^)', reg);
+              reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: vapidPublicKey })
+                .then(function(subscription) {
+                  console.log('endpoint:', subscription.endpoint);
+                  $.post("/subscribe", { subscription: subscription.toJSON() });
+                });
+            }
+          });
+        }
+      }).catch(function(error) {
+      console.log('Registration failed', ':^(', error);
+    });
+  });
+
+  if (!("Notification" in window)) {
+    console.error("This browser does not support desktop notification");
+  }
+
+  // Let's check whether notification permissions have already been granted
+  else if (Notification.permission === "granted") {
+    console.log("Permission to receive notifications has been granted");
+  }
+
+  // Otherwise, we need to ask the user for permission
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      // If the user accepts, let's create a notification
+      if (permission === "granted") {
+        console.log("Permission to receive notifications has been granted");
+      }
+    });
+  }
+}
+
+window.vapidPublicKey = new Uint8Array(<%= Base64.urlsafe_decode64(Rails.application.credentials.vapid[:public_key]).bytes %>);

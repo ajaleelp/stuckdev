@@ -1,0 +1,32 @@
+{
+  "icons": [
+    {
+      "src": "push-icon.png",
+      "type": "image/png",
+      "sizes": "64x64"
+    },
+    {
+      "src": "push-icon.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "push-icon.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "push-icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "name": "StuckDev",
+  "short_name": "StuckDev",
+  "start_url": "/",
+  "lang": "en-GB",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#27bbd5",
+  "background_color": "#ffffff"
+}
