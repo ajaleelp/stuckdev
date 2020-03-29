@@ -22,20 +22,23 @@
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                <a href="#" class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">Remove</a>
+                <%= form_with url: help_groups_remove_path, method: 'patch', local: true do |f| %>
+                  <%= f.hidden_field :group_id, value: group.id %>
+                  <%= f.hidden_field :user_id, value: user_id %>
+                  <%= f.submit 'Remove', class: 'text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline' %>
+                <% end %>
               </td>
             </tr>
           <% end %>
           </tbody>
         </table>
-        <form class="w-full py-2 px-4">
+        <%= form_with url: help_groups_add_path, class: 'w-full py-2 px-4', method: 'patch', local: true do |f| %>
           <div class="flex items-center border-b border-b-2 border-green-500 py-1">
-            <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="newmember@example.com" aria-label="Full name">
-            <button class="flex-shrink-0 bg-green-500 hover:bg-green-700 border-green-500 hover:border-green-700 text-sm border-4 text-white py-1/2 px-2 rounded" type="button">
-              Add
-            </button>
+            <%= f.hidden_field :group_id, value: group.id %>
+            <%= f.text_field :email, class: 'appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none', placeholder: 'newmember@example.com' %>
+            <%= f.submit 'Add', class: 'flex-shrink-0 bg-green-500 hover:bg-green-700 border-green-500 hover:border-green-700 text-sm border-4 text-white py-1/2 px-2 rounded' %>
           </div>
-        </form>
+        <% end %>
       </div>
     <% end %>
   </div>
