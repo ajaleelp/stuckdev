@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :help_groups, foreign_key: :owner_id
+  has_many :help_requests, through: :help_groups
 
   def self.find_or_create_from_auth_hash(auth)
     where(email: auth.info.email).first_or_initialize.tap do |user|

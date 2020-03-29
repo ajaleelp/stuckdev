@@ -35,8 +35,9 @@
                   <% default_classes =  "px-3 py-2 rounded-md text-sm font-medium leading-5 focus:outline-none focus:text-white focus:bg-green-700 transition duration-150 ease-in-out"%>
                   <% active_classes = "text-white bg-green-900" %>
                   <% inactive_classes = "text-green-300 hover:text-white hover:bg-green-700" %>
-                  <a href="<%= dashboard_path %>" class="<%= "#{default_classes} #{current_page?(action: 'show') ? active_classes : inactive_classes}" %>">Get Help</a>
-                  <a href="<%= dashboard_help_groups_path %>" class="<%= "ml-3 #{default_classes} #{current_page?(action: 'help_groups') ? active_classes : inactive_classes}" %>">Help Groups</a>
+                  <a href="<%= dashboard_path %>" class="<%= "#{default_classes} #{current_page?(controller: 'dashboard', action: 'show') ? active_classes : inactive_classes}" %>">Get Help</a>
+                  <a href="<%= help_requests_path %>" class="<%= "#{default_classes} #{current_page?(controller: 'help_requests', action: 'index') ? active_classes : inactive_classes}" %>">Requests</a>
+                  <a href="<%= dashboard_help_groups_path %>" class="<%= "ml-3 #{default_classes} #{current_page?(controller: 'dashboard', action: 'help_groups') ? active_classes : inactive_classes}" %>">Help Groups</a>
                 </div>
               </div>
             </div>

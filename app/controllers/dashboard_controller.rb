@@ -3,7 +3,8 @@ class DashboardController < ApplicationController
   layout 'dashboard'
 
   def show
-    @help_group_names = current_user.help_groups.all.pluck(:name)
+    @help_request = HelpRequest.new
+    @help_groups = current_user.help_groups.where.not(member_ids: [])
   end
 
   def help_groups

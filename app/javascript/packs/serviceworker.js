@@ -58,12 +58,13 @@ self.addEventListener('fetch', onFetch);
 
 function onPush(event) {
   var title = (event.data && event.data.text()) || "Yay a message";
+  console.log('Received message', title);
 
   event.waitUntil(
     self.registration.showNotification(title, {
       body: "We have received a push message",
       icon: "push-icon.png",
-      tag:  "push-simple-demo-notification-tag"
+      tag:  Math.random().toString(36).substring(7)
     })
   )
 }
