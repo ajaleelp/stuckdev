@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'notifications/subscribe'
   patch 'help_groups/add'
   patch 'help_groups/remove'
   post 'help_groups/create'
@@ -7,7 +8,7 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
   root 'home#index'
-  post "/subscribe", to: "home#subscribe"
+  post "/subscribe", to: "notifications#subscribe"
 
   get 'google_login', to: redirect('/auth/google_oauth2'), as: 'google_login'
   get 'github_login', to: redirect('/auth/github'), as: 'github_login'

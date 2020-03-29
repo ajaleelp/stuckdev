@@ -21,6 +21,10 @@ if ('serviceWorker' in navigator) {
           if (serviceWorker.state == "activated") {
             //If push subscription wasnt done yet have to do here
             console.log("sw already activated - Do watever needed here");
+            reg.pushManager.getSubscription().then(function(subscription) {
+              console.log('endpoint:', subscription.endpoint);
+              $.post("/subscribe", { subscription: subscription.toJSON() });
+            });
           }
           serviceWorker.addEventListener("statechange", function(e) {
             console.log("sw statechange : ", e.target.state);

@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    current_user&.update!(subscription: nil)
     session[:user_id] = nil
     redirect_to root_path
   end

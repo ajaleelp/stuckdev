@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authenticate
-    redirect_to :root_path unless user_signed_in?
+    redirect_to :root unless user_signed_in?
   end
 
   def current_user
@@ -12,5 +12,9 @@ class ApplicationController < ActionController::Base
 
   def user_signed_in?
     !!current_user
+  end
+
+  def clear_current_user
+    @current_user = nil
   end
 end
