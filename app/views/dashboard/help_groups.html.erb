@@ -32,8 +32,8 @@
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                 <%= form_with url: help_groups_remove_path, method: 'patch', local: true do |f| %>
-                  <%= f.hidden_field :group_id, value: group.id %>
-                  <%= f.hidden_field :user_id, value: user_id %>
+                  <%= hidden_field_tag :group_id, :id, { value: group.id, id: "remove-#{group.id}-#{user_id}"} %>
+                  <%= hidden_field_tag :user_id, :id, { value: user_id, id: "user_id-#{group.id}-#{user_id}"} %>
                   <%= f.submit 'Remove', class: 'text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline' %>
                 <% end %>
               </td>
@@ -43,8 +43,9 @@
         </table>
         <%= form_with url: help_groups_add_path, class: 'w-full py-2 px-4', method: 'patch', local: true do |f| %>
           <div class="flex items-center border-b border-b-2 border-green-500 py-1">
-            <%= f.hidden_field :group_id, value: group.id %>
-            <%= f.text_field :email, class: 'appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none', placeholder: 'newmember@example.com' %>
+            <%= hidden_field_tag :group_id, :id, { value: group.id, id: "add-#{group.id}" } %>
+            <% invitable_users = User.where.not(id: current_user.id).where.not(id: group.member_ids) %>
+            <%= f.select :user_id, invitable_users.collect {|u| [ u.email, u.id ] }, { placeholder: 'newmember@example.com' }, { class: 'js-select2 appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none', id: "select-#{group.id}" } %>
             <%= f.submit 'Add', class: 'flex-shrink-0 bg-green-500 hover:bg-green-700 border-green-500 hover:border-green-700 text-sm border-4 text-white py-1/2 px-2 rounded' %>
           </div>
         <% end %>

@@ -3,8 +3,7 @@ class HelpGroupsController < ApplicationController
 
   def add
     group = current_user.help_groups.find(params[:group_id])
-    user_id = User.find_by(email: params[:email])&.id.to_s
-    group.update!(member_ids: (group.member_ids | [user_id])) if user_id
+    group.update!(member_ids: (group.member_ids | [params[:user_id]]))
     redirect_to dashboard_help_groups_path
   end
 
