@@ -1,5 +1,14 @@
 <div class="flex flex-col  max-w-xl mx-auto mt-10">
   <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+    <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-400 bg-gray-200 mb-10">
+      <div class="px-6 py-3 text-green-500">Create New Group</div>
+      <%= form_with url: help_groups_create_path, class: 'w-full py-2 px-4', local: true do |f| %>
+        <div class="flex items-center border-b border-b-2 border-green-500 py-1">
+          <%= f.text_field :name, class: 'appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none', placeholder: 'Group Name' %>
+          <%= f.submit 'Create', class: 'flex-shrink-0 bg-green-500 hover:bg-green-700 border-green-500 hover:border-green-700 text-sm border-4 text-white py-1/2 px-2 rounded' %>
+        </div>
+      <% end %>
+    </div>
     <% @help_groups.each do |group| %>
       <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-400 bg-gray-200 mb-10">
         <table class="min-w-full">
@@ -7,7 +16,7 @@
             <div class="px-6 py-3 text-green-500"><%= group.name %></div>
           </thead>
           <tbody class="bg-white">
-          <% group.user_ids.each do |user_id| %>
+          <% group.member_ids.each do |user_id| %>
             <% user = User.find(user_id) %>
             <tr>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">

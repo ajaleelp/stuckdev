@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   patch 'help_groups/add'
   patch 'help_groups/remove'
-  post 'help_groups/new'
+  post 'help_groups/create'
   get '/dashboard', to: 'dashboard#show'
   get '/dashboard/help_groups', to: 'dashboard#help_groups'
   get 'sessions/create'

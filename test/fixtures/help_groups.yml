@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  user_ids: MyString
+  member_ids: MyString
 
 two:
   name: MyString
-  user_ids: MyString
+  member_ids: MyString
