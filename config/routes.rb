@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get '/dashboard', to: 'dashboard#show'
+  get '/dashboard/help_groups', to: 'dashboard#help_groups'
   get 'sessions/create'
   get 'sessions/destroy'
   root 'home#index'
