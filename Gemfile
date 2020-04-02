@@ -62,3 +62,9 @@ gem 'webpush', '~> 1.0.0'
 
 gem 'omniauth-google-oauth2', '~>0.8.0'
 gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
+
+# A deployment automation tool built on Ruby, Rake, and SSH.
+gem 'capistrano', '~> 3.11'
+gem 'capistrano-rails', '~> 1.4'
+gem 'capistrano-passenger', '~> 0.2.0'
+gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
