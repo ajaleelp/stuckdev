@@ -66,9 +66,37 @@ function onPush(event) {
     self.registration.showNotification(title, {
       body: body,
       icon: "push-icon.png",
-      tag:  Math.random().toString(36).substring(7)
+      tag:  Math.random().toString(36).substring(7),
+      requireInteraction: true,
+      actions: [
+        {action: 'connect', title: 'Connect'}]
     })
   )
 }
 
 self.addEventListener("push", onPush);
+
+self.addEventListener('notificationclick', function(event) {
+  const clickedNotification = event.notification;
+
+  event.notification.close();
+
+  if (event.action === 'connect') {
+    event.waitUntil(
+      clients.matchAll({type: 'window'}).then( windowClients => {
+        // Check if there is already a window/tab open with the target URL
+        for (var i = 0; i < windowClients.length; i++) {
+          var client = windowClients[i];
+          // If so, just focus it.
+          if (client.url === url && 'focus' in client) {
+            return client.focus();
+          }
+        }
+        // If not, then open the target URL in a new window/tab.
+        if (clients.openWindow) {
+          return clients.openWindow('https://stuckdev.com/help_requests');
+        }
+      })
+    );
+  }
+}, false);
