@@ -8,7 +8,9 @@ class HelpRequestsController < ApplicationController
   end
 
   def index
-    @requests = current_user.help_requests.includes(:help_group).order(created_at: :desc)
+    @sent_requests = current_user.help_requests.includes(:help_group).order(created_at: :desc)
+    member_help_groups = HelpGroup.where("'?' = ANY (member_ids)", current_user.id)
+    @received_requests = HelpRequest.where(help_group: member_help_groups)
   end
 
   def connect

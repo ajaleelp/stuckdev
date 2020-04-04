@@ -6,3 +6,4 @@ $(document).on("turbolinks:load", () => {
 });
 
 import 'serviceworker-companion.js.erb';
+import '../components/HelpRequestsList';
