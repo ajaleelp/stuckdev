@@ -62,8 +62,6 @@ function onPush(event) {
   var title = payload.title;
   var body = payload.body;
   var data = payload.data;
-  console.log("data");
-  console.log(data);
 
   event.waitUntil(
     self.registration.showNotification(title, {
@@ -82,7 +80,7 @@ self.addEventListener("push", onPush);
 
 self.addEventListener('notificationclick', function(event) {
   const clickedNotification = event.notification;
-  const url = "http://localhost:3000/help_requests/" + clickedNotification.data.help_request_id + "/connect";
+  const url = "http://" + self.location.hostname + "/help_requests/" + clickedNotification.data.help_request_id + "/connect";
   console.log(url);
 
   event.notification.close();
