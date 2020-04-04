@@ -4,7 +4,7 @@ class HelpRequestsController < ApplicationController
 
   def create
     help_request = HelpRequests::CreationService.create!(create_params)
-    redirect_to connect_help_request_path(help_request)
+    redirect_to "https://meet.jit.si/#{help_request.room_name}"
   end
 
   def index
