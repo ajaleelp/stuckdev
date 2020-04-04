@@ -3,7 +3,7 @@ class HelpRequestsController < ApplicationController
   layout 'dashboard'
 
   def create
-    HelpRequest.create!(create_params)
+    HelpRequests::CreationService.create!(create_params)
     redirect_to help_requests_path
   end
 
