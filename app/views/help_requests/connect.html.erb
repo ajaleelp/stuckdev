@@ -1,0 +1,5 @@
+<% if @help_request.owner.id == current_user.id %>
+  <div>Please wait while we try to get someone from <%= @help_request.help_group.name %> to help you out</div>
+<% else %>
+  <div>Please wait while we connect you to <%= @help_request.owner.first_name %></div>
+<% end %>

@@ -61,10 +61,14 @@ function onPush(event) {
   var payload = event.data.json();
   var title = payload.title;
   var body = payload.body;
+  var data = payload.data;
+  console.log("data");
+  console.log(data);
 
   event.waitUntil(
     self.registration.showNotification(title, {
       body: body,
+      data: data,
       icon: "push-icon.png",
       tag:  Math.random().toString(36).substring(7),
       requireInteraction: true,
@@ -78,6 +82,8 @@ self.addEventListener("push", onPush);
 
 self.addEventListener('notificationclick', function(event) {
   const clickedNotification = event.notification;
+  const url = "http://localhost:3000/help_requests/" + clickedNotification.data.help_request_id + "/connect";
+  console.log(url);
 
   event.notification.close();
 
@@ -94,7 +100,7 @@ self.addEventListener('notificationclick', function(event) {
         }
         // If not, then open the target URL in a new window/tab.
         if (clients.openWindow) {
-          return clients.openWindow('https://stuckdev.com/help_requests');
+          return clients.openWindow(url);
         }
       })
     );

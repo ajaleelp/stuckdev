@@ -13,7 +13,11 @@ Rails.application.routes.draw do
 
   post "/subscribe", to: "notifications#subscribe"
 
-  resources :help_requests, only: [:create, :index]
+  resources :help_requests, only: [:create, :index] do
+    member do
+      get '/connect', action: 'connect'
+    end
+  end
 
   get 'google_login', to: redirect('/auth/google_oauth2'), as: 'google_login'
   get 'github_login', to: redirect('/auth/github'), as: 'github_login'

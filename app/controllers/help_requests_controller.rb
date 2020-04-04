@@ -3,12 +3,16 @@ class HelpRequestsController < ApplicationController
   layout 'dashboard'
 
   def create
-    HelpRequests::CreationService.create!(create_params)
-    redirect_to help_requests_path
+    help_request = HelpRequests::CreationService.create!(create_params)
+    redirect_to connect_help_request_path(help_request)
   end
 
   def index
     @requests = current_user.help_requests.includes(:help_group).order(created_at: :desc)
+  end
+
+  def connect
+    @help_request = HelpRequest.find(params[:id])
   end
 
   private

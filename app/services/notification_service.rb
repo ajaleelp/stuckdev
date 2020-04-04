@@ -4,12 +4,13 @@ class NotificationService
     @subscription = @user.subscription&.deep_symbolize_keys!
   end
   
-  def notify(title: title, message: message)
+  def notify(title: title, message: message, data: nil)
     raise 'Tried to notify without subscription!' unless @subscription
 
     payload = {
       title: title,
-      body: message
+      body: message,
+      data: data
     }
 
     Webpush.payload_send(
