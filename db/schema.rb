@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_29_170300) do
+ActiveRecord::Schema.define(version: 2020_04_05_142334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 2020_03_29_170300) do
     t.bigint "help_group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "current_helper_id"
+    t.index ["current_helper_id"], name: "index_help_requests_on_current_helper_id"
     t.index ["help_group_id"], name: "index_help_requests_on_help_group_id"
   end
 
@@ -47,4 +49,5 @@ ActiveRecord::Schema.define(version: 2020_03_29_170300) do
 
   add_foreign_key "help_groups", "users", column: "owner_id"
   add_foreign_key "help_requests", "help_groups"
+  add_foreign_key "help_requests", "users", column: "current_helper_id"
 end

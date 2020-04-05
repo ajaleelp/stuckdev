@@ -4,7 +4,7 @@ class HelpRequestsController < ApplicationController
 
   def create
     help_request = HelpRequests::CreationService.create!(create_params)
-    redirect_to connect_help_request_path(help_request)
+    redirect_to wait_help_request_path(help_request)
   end
 
   def index
@@ -14,6 +14,25 @@ class HelpRequestsController < ApplicationController
   end
 
   def connect
+    @help_request = HelpRequest.find(params[:id])
+    return if current_user == @help_request.owner
+
+    current_helper = @help_request.current_helper
+    being_helped = current_helper.present? && (current_helper != current_user)
+    raise 'Already being helped by someone else!' if being_helped
+
+    @help_request.update!(current_helper: current_user) unless current_helper
+  end
+
+  def wait
+    @help_request = current_user.help_requests.find(params[:id])
+    if @help_request.current_helper_id.present?
+      redirect_to connect_help_request_path(@help_request)
+      return
+    end
+  end
+
+  def preview
     @help_request = HelpRequest.find(params[:id])
   end
 

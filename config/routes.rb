@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :help_requests, only: [:create, :index] do
     member do
       get '/connect', action: 'connect'
+      get '/wait', action: 'wait'
+      get '/preview', action: 'preview'
     end
   end
 
