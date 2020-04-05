@@ -80,8 +80,8 @@ self.addEventListener("push", onPush);
 
 self.addEventListener('notificationclick', function(event) {
   const clickedNotification = event.notification;
-  // const url = "http://" + self.location.hostname + "/help_requests/" + clickedNotification.data.help_request_id + "/connect";
-  const url = "https://meet.jit.si/" + clickedNotification.data.room_name;
+  const url = "http://" + self.location.hostname + "/help_requests/" + clickedNotification.data.help_request_id + "/connect";
+  // const url = "https://meet.jit.si/" + clickedNotification.data.room_name;
   console.log(url);
 
   event.notification.close();

@@ -1,0 +1,1 @@
+import '../connect_session/jitsi_init'

@@ -1,5 +1,9 @@
-<% if @help_request.owner.id == current_user.id %>
-  <div>Please wait while we try to get someone from <%= @help_request.help_group.name %> to help you out</div>
-<% else %>
-  <div>Please wait while we connect you to <%= @help_request.owner.first_name %></div>
+<% content_for :head do %>
+  <%= javascript_include_tag "https://meet.jit.si/external_api.js" %>
+  <%= javascript_pack_tag 'jitsi', 'data-turbolinks-track': 'reload' %>
 <% end %>
+<div id="screen-share" class="w-screen h-screen"
+     data-room-name='<%= "stuckdev-session-#{params[:id]}" %>'
+     data-display-name='<%= current_user.first_name %>'
+     data-avatar-url='<%= current_user.picture %>'
+     data-is-owner=<%= @help_request.owner.id == current_user.id %>></div>
