@@ -16,13 +16,18 @@ $(document).on("turbolinks:load", () => {
     subject: ['StuckDev Help Session']
   });
 
+  const helpRequestId = rootNode.data('helpRequestId');
   if (rootNode.data('isOwner')) {
     api.executeCommand('toggleShareScreen');
-  };
+  }
 
   function readyToCloseListener(object) {
     console.log('Closing...');
-    window.location.replace("http://" + window.location.host + "/help_requests");
+    if (rootNode.data('isOwner')) {
+      window.location.replace("http://" + window.location.host + "/help_requests/" + helpRequestId + "/follow_up")
+    } else {
+      window.location.replace("http://" + window.location.host + "/help_requests/" + helpRequestId + "/thanks")
+    }
   }
   api.addEventListener('readyToClose', readyToCloseListener);
 });

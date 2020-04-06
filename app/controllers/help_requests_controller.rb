@@ -40,6 +40,14 @@ class HelpRequestsController < ApplicationController
     render json: { help_available: HelpRequest.find(params[:id]).current_helper_id.present? }
   end
 
+  def follow_up
+    @help_request = current_user.help_requests.where.not(current_helper_id: nil).find(params[:id])
+  end
+
+  def thanks
+    @help_request = HelpRequest.find(params[:id])
+  end
+
   private
 
   def create_params

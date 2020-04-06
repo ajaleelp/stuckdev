@@ -6,4 +6,5 @@
      data-room-name='<%= "stuckdev-session-#{params[:id]}" %>'
      data-display-name='<%= current_user.first_name %>'
      data-avatar-url='<%= current_user.picture %>'
-     data-is-owner=<%= @help_request.owner.id == current_user.id %>></div>
+     data-is-owner=<%= @help_request.owner.id == current_user.id %>
+     data-help-request-id=<%= @help_request.id %>></div>

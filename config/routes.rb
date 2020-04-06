@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       get '/wait', action: 'wait'
       get '/preview', action: 'preview'
       get '/help_available', action: 'help_available', constraints: { format: 'json' }
+      get '/follow_up', action: 'follow_up'
+      get '/thanks', action: 'thanks'
     end
   end
 
