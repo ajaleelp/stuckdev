@@ -1,4 +1,7 @@
-<div class="max-w-xl mx-auto mt-10">
+<% content_for :head do %>
+  <%= javascript_pack_tag 'help_availability_poll', 'data-turbolinks-track': 'reload' %>
+<% end %>
+<div class="max-w-xl mx-auto mt-10" id="wait-notice" data-request-id=<%= @help_request.id %>>
   <div class="rounded overflow-hidden shadow-lg">
     <img class="w-full" src="/wait.png">
     <div class="px-6 py-4">

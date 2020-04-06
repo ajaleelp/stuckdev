@@ -1,5 +1,5 @@
 class HelpRequestsController < ApplicationController
-  before_action :authenticate
+  before_action :authenticate, except: :help_available
   layout 'dashboard'
 
   def create
@@ -34,6 +34,10 @@ class HelpRequestsController < ApplicationController
 
   def preview
     @help_request = HelpRequest.find(params[:id])
+  end
+
+  def help_available
+    render json: { help_available: HelpRequest.find(params[:id]).current_helper_id.present? }
   end
 
   private
