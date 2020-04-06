@@ -1,3 +1,32 @@
 // Place all the styles related to the HelpGroups controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.select2-container--default {
+  .select2-selection--single {
+    padding: 5px;
+    height: auto !important;
+    position: relative;
+    outline: none;
+    border-color: #cbd5e0 !important;
+  }
+  .select2-selection__rendered {
+    line-height: 1.6 !important;
+  }
+  .select2-selection__arrow {
+    height: 35px !important;
+    right: 4px !important;
+  }
+  .select2-results__option--highlighted[aria-selected] {
+    background-color: #f7fafc !important;
+    color: #5a67d8 !important;
+  }
+  .select2-results__option[aria-selected=true] {
+    background-color: #edf2f7 !important;
+    color: #4a5568 !important;
+  }
+}
+.select2-dropdown {
+  border-color: #cbd5e0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}

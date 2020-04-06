@@ -1,19 +1,20 @@
-<div class="flex flex-col  max-w-xl mx-auto mt-10">
-  <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-    <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-400 bg-gray-200 mb-10">
-      <div class="px-6 py-3 text-green-500">Create New Group</div>
-      <%= form_with url: help_groups_create_path, class: 'w-full py-2 px-4', local: true do |f| %>
-        <div class="flex items-center border-b border-b-2 border-green-500 py-1">
-          <%= f.text_field :name, class: 'appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none', placeholder: 'Group Name' %>
-          <%= f.submit 'Create', class: 'flex-shrink-0 bg-green-500 hover:bg-green-700 border-green-500 hover:border-green-700 text-sm border-4 text-white py-1/2 px-2 rounded' %>
+<div class="flex flex-col max-w-xl mx-auto mt-10">
+  <div class="py-2">
+    <div class="shadow rounded-lg bg-white">
+      <div class="px-4 py-3">Create New Group</div>
+      <%= form_with url: help_groups_create_path, class: 'w-full p-4', local: true do |f| %>
+        <div class="flex border-b border-b-2 border-green-500 py-1">
+          <%= f.text_field :name, class: 'appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-2 px-2 leading-tight focus:outline-none', placeholder: 'Group Name' %>
+          <%= f.submit 'Create', class: 'flex-1 flex-shrink-0 bg-green-600 hover:bg-green-700 text-sm text-white py-1 px-3 rounded' %>
         </div>
       <% end %>
     </div>
+    <h2 class="text-xl pl-1 pb-1 font-semibold mt-8"">Groups</h2>
     <% @help_groups.each do |group| %>
-      <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-400 bg-gray-200 mb-10">
+      <div class="shadow rounded-lg mb-6 bg-white">
         <table class="min-w-full">
           <thead>
-            <div class="px-6 py-3 text-green-500"><%= group.name %></div>
+            <div class="px-4 py-3"><%= group.name %></div>
           </thead>
           <tbody class="bg-white">
           <% group.member_ids.each do |user_id| %>
@@ -41,12 +42,12 @@
           <% end %>
           </tbody>
         </table>
-        <%= form_with url: help_groups_add_path, class: 'w-full py-2 px-4', method: 'patch', local: true do |f| %>
-          <div class="flex items-center border-b border-b-2 border-green-500 py-1">
+        <%= form_with url: help_groups_add_path, class: 'w-full p-4', method: 'patch', local: true do |f| %>
+          <div class="flex">
             <%= hidden_field_tag :group_id, :id, { value: group.id, id: "add-#{group.id}" } %>
             <% invitable_users = User.where.not(id: current_user.id).where.not(id: group.member_ids) %>
             <%= f.select :user_id, invitable_users.collect {|u| [ u.email, u.id ] }, { placeholder: 'newmember@example.com' }, { class: 'js-select2 appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none', id: "select-#{group.id}" } %>
-            <%= f.submit 'Add', class: 'flex-shrink-0 bg-green-500 hover:bg-green-700 border-green-500 hover:border-green-700 text-sm border-4 text-white py-1/2 px-2 rounded' %>
+            <%= f.submit 'Add', class: 'flex-1 flex-shrink-0 bg-green-600 hover:bg-green-700 text-sm text-white py-1 px-3 ml-3 rounded' %>
           </div>
         <% end %>
       </div>
