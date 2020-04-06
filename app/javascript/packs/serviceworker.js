@@ -71,7 +71,9 @@ function onPush(event) {
       tag:  Math.random().toString(36).substring(7),
       requireInteraction: true,
       actions: [
-        {action: 'connect', title: 'Connect'}]
+        {action: 'view', title: 'View'},
+        {action: 'pass', title: 'Pass'}
+        ]
     })
   )
 }
@@ -86,7 +88,7 @@ self.addEventListener('notificationclick', function(event) {
 
   event.notification.close();
 
-  if (event.action === 'connect') {
+  if (!event.action || event.action === 'view') {
     event.waitUntil(
       clients.matchAll({type: 'window'}).then( windowClients => {
         // Check if there is already a window/tab open with the target URL
@@ -103,5 +105,19 @@ self.addEventListener('notificationclick', function(event) {
         }
       })
     );
+  } else if (event.action === 'pass') {
+    const passURL = "http://" + self.location.host + "/help_requests/" + clickedNotification.data.help_request_id + "/pass_notification";
+    fetch(passURL, {
+      method: "POST",
+      headers: {
+        'Accept': "application/json",
+        'Content-Type': "application/json",
+      },
+      body: JSON.stringify({ passedById: clickedNotification.data.sent_to_id })
+    })
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("POST", passURL, true);
+    // xhr.setRequestHeader('Content-Type', 'application/json');
+    // xhr.send(JSON.stringify({ passedById: clickedNotification.data.sent_to_id }));
   }
 }, false);

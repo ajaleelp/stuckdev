@@ -8,7 +8,8 @@ module HelpRequests
 
     def circulate!
       @target_users.each do |user|
-        NotificationService.new(user).notify(title: title, message: message, data: { help_request_id: @help_request.id })
+        data = { help_request_id: @help_request.id, sent_to_id: user.id }
+        NotificationService.new(user).notify(title: title, message: message, data: data)
       end
     end
 

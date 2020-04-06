@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       get '/help_available', action: 'help_available', constraints: { format: 'json' }
       get '/follow_up', action: 'follow_up'
       get '/thanks', action: 'thanks'
+      post '/pass_notification', action: 'pass_notification', constraints: { format: 'json' }
     end
   end
 

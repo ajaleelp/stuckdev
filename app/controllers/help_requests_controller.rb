@@ -1,5 +1,6 @@
 class HelpRequestsController < ApplicationController
-  before_action :authenticate, except: :help_available
+  before_action :authenticate, except: [:help_available, :pass_notification]
+  skip_before_filter :verify_authenticity_token, only: :pass_notification
   layout 'dashboard'
 
   def create
@@ -46,6 +47,10 @@ class HelpRequestsController < ApplicationController
 
   def thanks
     @help_request = HelpRequest.find(params[:id])
+  end
+
+  def pass_notification
+    head :ok
   end
 
   private
