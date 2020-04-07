@@ -1,6 +1,6 @@
 class HelpRequestsController < ApplicationController
   before_action :authenticate, except: [:help_available, :pass_notification]
-  skip_before_filter :verify_authenticity_token, only: :pass_notification
+  skip_before_action :verify_authenticity_token, only: :pass_notification
   layout 'dashboard'
 
   def create
