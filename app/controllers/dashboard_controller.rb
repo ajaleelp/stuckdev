@@ -8,7 +8,7 @@ class DashboardController < ApplicationController
   end
 
   def help_groups
-    @help_groups = current_user.help_groups.all.order(:name)
+    @help_groups = current_user.help_groups.all.order(created_at: :desc)
     @users = User.all.order(:first_name)
   end
 end
