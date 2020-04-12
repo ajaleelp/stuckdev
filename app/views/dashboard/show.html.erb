@@ -1,5 +1,8 @@
 <div class="w-full max-w-5xl mx-auto mt-10">
   <%= form_with model: @help_request, class: "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4", local: true do |f| %>
+    <div class="text-right">
+    <%= link_to 'Code of Conduct', code_of_conduct_path, class: 'underline text-green-600', target: '_blank' %>
+    </div>
     <%= f.label :topic, class: 'block text-gray-700 text-sm mb-2' %>
     <%= f.text_field :topic, required: true, placeholder: "The error message, maybe?", class: 'font-mono text-sm shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4' %>
     <%= f.label :details, class: 'block text-gray-700 text-sm mb-2' %>

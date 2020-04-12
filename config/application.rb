@@ -17,5 +17,7 @@ module Stuckdev
     # the framework and any gems in your application.
 
     config.autoload_paths += %W(#{config.root}/app/services)
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    Rails.application.config.assets.precompile += %w(.ttf)
   end
 end

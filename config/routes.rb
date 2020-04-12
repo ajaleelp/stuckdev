@@ -30,4 +30,5 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy', as: 'logout'
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
+  get 'code_of_conduct', to: 'home#code_of_conduct', as: 'code_of_conduct'
 end

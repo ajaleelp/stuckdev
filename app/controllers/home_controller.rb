@@ -8,4 +8,6 @@ class HomeController < ApplicationController
       end
     end
   end
+
+  def code_of_conduct; end
 end
