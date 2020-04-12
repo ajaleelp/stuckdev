@@ -29,5 +29,11 @@ $(document).on("turbolinks:load", () => {
       window.location.replace("http://" + window.location.host + "/help_requests/" + helpRequestId + "/thanks")
     }
   }
+
+  function participantLeftListener(object) {
+    api.executeCommand('hangup');
+  }
+
   api.addEventListener('readyToClose', readyToCloseListener);
+  api.addEventListener('participantLeft', participantLeftListener);
 });
