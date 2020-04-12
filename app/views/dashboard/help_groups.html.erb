@@ -56,7 +56,7 @@
             <div class="flex">
               <%= hidden_field_tag :group_id, :id, { value: group.id, id: "add-#{group.id}" } %>
               <% invitable_users = User.where.not(id: current_user.id).where.not(id: group.member_ids) %>
-              <%= f.select :user_id, invitable_users.collect {|u| [ u.email, u.id ] }, { prompt: 'Search by email' }, { class: 'js-select2 appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none', id: "select-#{group.id}" } %>
+              <%= f.select :user_id, invitable_users.collect {|u| [ u.email, u.id ] }, { prompt: 'Search by email' }, { class: 'js-select2 appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none', id: "select-#{group.id}", required: true } %>
               <%= f.submit 'Add', class: 'flex-1 flex-shrink-0 bg-green-600 hover:bg-green-700 text-sm text-white py-1 px-3 ml-3 rounded' %>
             </div>
           <% end %>
@@ -76,7 +76,7 @@
       <div class="px-4 py-3">Create <%= @help_groups.empty? ? "your first" : "another" %> help group</div>
       <%= form_with url: help_groups_create_path, class: 'w-full p-4', local: true do |f| %>
         <div class="flex border-b border-b-2 border-green-500 py-1">
-          <%= f.text_field :name, class: 'appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-2 px-2 leading-tight focus:outline-none', placeholder: 'Group Name' %>
+          <%= f.text_field :name, required: true, class: 'appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-2 px-2 leading-tight focus:outline-none', placeholder: 'Group Name' %>
           <%= f.submit 'Create', class: 'flex-1 flex-shrink-0 bg-green-600 hover:bg-green-700 text-sm text-white py-1 px-3 rounded' %>
         </div>
       <% end %>
