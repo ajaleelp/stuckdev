@@ -1,12 +1,13 @@
 import {
   AppBar,
   Button,
+  darken,
   makeStyles,
   Toolbar,
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { Link, Redirect, Route, Switch } from 'react-router-dom';
+import { NavLink as Link, Redirect, Route, Switch } from 'react-router-dom';
 import GetHelp from './views/get-help/get-help';
 import HelpGroups from './views/help-groups/help-groups';
 import Requests from './views/requests/requests';
@@ -25,6 +26,11 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1),
     flexGrow: 1,
   },
+  navLink: {
+    '&.active': {
+      backgroundColor: darken(theme.palette.primary.main, 0.4),
+    },
+  },
 }));
 
 export function App() {
@@ -37,13 +43,28 @@ export function App() {
           <Typography variant="h6" className={classes.title}>
             Stuckdev
           </Typography>
-          <Button color="inherit" component={Link} to={'/help-groups'}>
+          <Button
+            color="inherit"
+            className={classes.navLink}
+            component={Link}
+            to={'/help-groups'}
+          >
             Help Groups
           </Button>
-          <Button color="inherit" component={Link} to={'/get-help'}>
+          <Button
+            color="inherit"
+            className={classes.navLink}
+            component={Link}
+            to={'/get-help'}
+          >
             Get Help
           </Button>
-          <Button color="inherit" component={Link} to={'/request'}>
+          <Button
+            color="inherit"
+            className={classes.navLink}
+            component={Link}
+            to={'/request'}
+          >
             Requests
           </Button>
         </Toolbar>
